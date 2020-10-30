@@ -14,9 +14,7 @@
             media_thumb mediaThumb,
             music_url musicUrl,
             music_name musicName,
-            music_poster musicPoster,
-            like_number likeNumber,
-            comment_number commentNumber
+            music_poster musicPoster
         from
             t_sys_media a
         left join
