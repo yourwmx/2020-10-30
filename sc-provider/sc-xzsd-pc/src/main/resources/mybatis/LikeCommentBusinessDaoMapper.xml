@@ -2,11 +2,11 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xzsd.pc.likeCommentBusiness.dao.likeCommentBusinessDao">
+<mapper namespace="com.xzsd.pc.LikeCommentBusiness.dao.LikeCommentBusinessDao">
     <!--获取点赞媒体业务编号-->
-    <select id="querylikeCommentBusinessId" parameterType="java.util.List" resultType="com.xzsd.pc.likeCommentBusiness.entity.likeCommentBusinessInfo">
+    <select id="queryLikeCommentBusinessId" parameterType="java.util.List" resultType="com.xzsd.pc.LikeCommentBusiness.entity.LikeCommentBusinessInfo">
         select
-            like_media_business_id likeCommentBusinessId,
+            like_media_business_id LikeCommentBusinessId,
             media_id mediaId
         from
             t_sys_like_comment_business
@@ -19,7 +19,7 @@
         </foreach>
     </select>
     <!--未点赞->点赞-->
-    <insert id="addlikeCommentBusiness" parameterType="com.xzsd.pc.likeCommentBusiness.entity.likeCommentBusinessInfo">
+    <insert id="addLikeCommentBusiness" parameterType="com.xzsd.pc.LikeCommentBusiness.entity.LikeCommentBusinessInfo">
         insert into t_sys_like_comment_business
             (
             like_comment_business_id,
@@ -46,7 +46,7 @@
             )
     </insert>
     <!--点赞->取消点赞-->
-    <update id="deletelikeCommentBusiness" parameterType="com.xzsd.pc.likeCommentBusiness.entity.likeCommentBusinessInfo">
+    <update id="deleteLikeCommentBusiness" parameterType="com.xzsd.pc.LikeCommentBusiness.entity.LikeCommentBusinessInfo">
         update
             t_sys_like_comment_business
         set
