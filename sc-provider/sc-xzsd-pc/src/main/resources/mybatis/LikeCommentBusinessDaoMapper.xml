@@ -6,7 +6,7 @@
     <!--获取点赞媒体业务编号-->
     <select id="queryLikeCommentBusinessId" parameterType="java.util.List" resultType="com.xzsd.pc.LikeCommentBusiness.entity.LikeCommentBusinessInfo">
         select
-            like_media_business_id LikeCommentBusinessId,
+            like_media_business_id likeCommentBusinessId,
             media_id mediaId
         from
             t_sys_like_comment_business
