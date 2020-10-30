@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neusoft.webauth.media.dao.MediaDao">
+    <!--    获取文件列表-->
+    <select id="listMedias" parameterType="com.neusoft.webauth.media.entity.MediaInfo" resultType="com.neusoft.webauth.media.entity.MediaInfo">
+        select
+            media_id mediaId,
+            media_url mediaUrl,
+            account,
+            photo,
+            media_introduce mediaIntroduce,
+            media_thumb mediaThumb,
+            music_url musicUrl,
+            music_name musicName,
+            music_poster musicPoster,
+            like_number likeNumber,
+            comment_number commentNumber
+        from
+            t_sys_media a
+        left join
+            t_sys_music b
+        on
+            a.music_id = b.music_id
+        left join
+            t_sys_user c
+        on
+            a.user_id = c.user_id
+        where
+            a.is_deleted = 0
+            and a.user_id = #{userId}
+    </select>
+</mapper>

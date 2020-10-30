@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.media.dao.MediaDao">
+    <!--   新增文件 -->
+    <insert id="addMedia" parameterType="com.xzsd.pc.media.entity.MediaInfo">
+        insert into t_sys_media
+            (
+                media_id,
+                media_url,
+                user_id,
+                media_introduce,
+                media_thumb,
+                music_id,
+                like_number,
+                comment_number,
+                is_deleted,
+                gmt_create,
+                create_by,
+                gmt_modified,
+                last_modified_by,
+                version
+            )
+            values
+            (
+                #{mediaId},
+                #{mediaUrl},
+                #{userId},
+                #{mediaIntroduce},
+                #{mediaThumb},
+                #{musicId},
+                0,
+                0,
+                0,
+                now(),
+                #{createBy},
+                now(),
+                #{lastModifiedBy},
+                0
+            )
+    </insert>
+    <!--    获取文件列表-->
+    <select id="listMedias" parameterType="com.xzsd.pc.media.entity.MediaInfo"
+            resultType="com.xzsd.pc.media.entity.MediaInfo">
+        select
+            a.media_id mediaId,
+            media_url mediaUrl,
+            a.user_id userId,
+            account,
+            photo,
+            media_introduce mediaIntroduce,
+            media_thumb mediaThumb,
+            music_url musicUrl,
+            music_name musicName,
+            music_poster musicPoster,
+            d.countLikeMedia likeNumber,
+            e.countComment commentNumber
+        from
+            t_sys_media a
+        left join
+            t_sys_music b
+        on
+            a.music_id = b.music_id
+        left join
+            t_sys_user c
+        on
+            a.user_id = c.user_id
+        left join
+            (select
+                media_id mediaId,
+                count(*) countLikeMedia
+            from
+                t_sys_like_media_business
+            where
+                is_deleted = 0
+            group by media_id) d
+        on
+            a.media_id = d.mediaId
+        left join
+            (select
+                media_id mediaId,
+                count(*) countComment
+            from
+                t_sys_comment
+            where
+                is_deleted = 0
+            group by media_id) e
+        on
+            a.media_id = e.mediaId
+        where
+            a.is_deleted = 0
+        <if test="userId != null and userId != ''">
+            and a.user_id = #{userId}
+        </if>
+    </select>
+    <!--删除文件-->
+    <update id="deleteMedia" parameterType="com.xzsd.pc.media.entity.MediaInfo">
+        update
+            t_sys_media
+        set
+            is_deleted = 1,
+            gmt_modified = now(),
+            last_modified_by = #{updateUserId},
+            version = version + 1
+        where
+            media_id in
+        <foreach item="item" index="index" collection="listDeleteMediaId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+</mapper>

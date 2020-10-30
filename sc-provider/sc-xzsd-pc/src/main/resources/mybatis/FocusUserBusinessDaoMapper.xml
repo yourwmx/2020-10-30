@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.focusUserBusiness.dao.FocusUserBusinessDao">
+    <!--获取关注用户业务编号-->
+    <select id="queryFocusUserBusinessId" parameterType="java.util.List" resultType="com.xzsd.pc.focusUserBusiness.entity.FocusUserBusinessInfo">
+        select
+            focus_user_business_id focusUserBusinessId,
+            focus_user_id focusUserId,
+            be_focus_user_id beFocusUserId
+        from
+            t_sys_focus_user_business
+        where
+            is_deleted = 0
+            and focus_user_id = #{focusUserId}
+            and be_focus_user_id in
+        <foreach item="item" index="index" collection="listUserId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <!--未关注->关注-->
+    <insert id="addFocusUserBusiness" parameterType="com.xzsd.pc.focusUserBusiness.entity.FocusUserBusinessInfo">
+        insert into t_sys_focus_user_business
+            (
+            focus_user_business_id,
+            focus_user_id,
+            be_focus_user_id,
+            is_deleted,
+            create_by,
+            gmt_create,
+            last_modified_by,
+            gmt_modified,
+            version
+            )
+        values
+            (
+            #{focusUserBusinessId},
+            #{focusUserId},
+            #{beFocusUserId},
+            0,
+            #{createBy},
+            now(),
+            #{lastModifiedBy},
+            now(),
+            0
+            )
+    </insert>
+    <!--关注->取消关注-->
+    <update id="deleteFocusUserBusiness" parameterType="com.xzsd.pc.focusUserBusiness.entity.FocusUserBusinessInfo">
+        update
+            t_sys_focus_user_business
+        set
+            is_deleted = 1,
+            gmt_modified = now(),
+            last_modified_by = #{lastModifiedBy},
+            version = version + 1
+        where
+            focus_user_id = #{focusUserId}
+            and be_focus_user_id = #{beFocusUserId}
+            and is_deleted = 0
+    </update>
+</mapper>

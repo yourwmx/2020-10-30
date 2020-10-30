@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.music.dao.MusicDao">
+    <!--    新增音乐-->
+    <insert id="addMusic" parameterType="com.xzsd.pc.music.entity.MusicInfo">
+        insert into t_sys_music
+            (
+                music_id,
+                music_name,
+                music_url,
+                music_author,
+                music_poster,
+                music_size,
+                is_deleted,
+                gmt_create,
+                create_by,
+                gmt_modified,
+                last_modified_by,
+                version
+            )
+            values
+            (
+                #{musicId},
+                #{musicName},
+                #{musicUrl},
+                #{musicAuthor},
+                #{musicSize},
+                #{musicPoster},
+                0,
+                now(),
+                #{createBy},
+                now(),
+                #{lastModifiedBy},
+                0
+            )
+    </insert>
+    <!--    获取音乐列表-->
+    <select id="listMusics" resultType="com.xzsd.pc.music.entity.MusicInfo">
+        select
+            music_id musicId,
+            music_name musicName,
+            music_url musicUrl,
+            music_author musicAuthor,
+            music_poster musicPoster,
+            music_size musicSize
+        from
+            t_sys_music
+        where
+            is_deleted = 0
+    </select>
+</mapper>

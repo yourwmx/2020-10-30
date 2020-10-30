@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xzsd.pc.comment.dao.CommentDao">
+    <!--查询媒体评价分页列表-->
+    <resultMap id="commentMap" type="com.xzsd.pc.comment.entity.CommentInfo">
+        <id property="commentId" column="comment_id"></id>
+        <result property="comment" column="comment"></result>
+        <result property="gmtCreate" column="gmt_create"></result>
+        <result property="userId" column="user_id"></result>
+        <result property="account" column="account"></result>
+        <result property="photo" column="photo"></result>
+        <result property="lastCommentId" column="last_comment_id"></result>
+        <collection property="secondCommentList" ofType="com.xzsd.pc.comment.entity.CommentInfo">
+            <id column="comment_ids" property="commentId"></id>
+            <result column="comments" property="comment"></result>
+            <result column="gmt_creates" property="gmtCreate"></result>
+            <result column="user_ids" property="userId"></result>
+            <result column="be_user_id" property="beUserId"></result>
+            <result column="be_user_account" property="beUserAccount"></result>
+            <result column="accounts" property="account"></result>
+            <result column="photos" property="photo"></result>
+            <result column="last_comment_ids" property="lastCommentId"></result>
+        </collection>
+    </resultMap>
+    <select id="listComments" resultMap="commentMap">
+        select
+            c.user_id,
+            c.account,
+            c.photo,
+            a.comment_id,
+            a.comment,
+            a.gmt_create,
+            a.last_comment_id,
+            d.user_id user_ids,
+            d.account accounts,
+            d.photo photos,
+            b.comment_id comment_ids,
+            b.comment comments,
+            b.be_user_id,
+            e.account be_user_account,
+            b.gmt_create gmt_greates,
+            b.last_comment_id last_comment_ids
+        from
+            t_sys_comment a
+        left join
+            t_sys_comment b
+        on
+            a.is_deleted = 0
+            and b.last_comment_id = a.comment_id
+        left join
+            t_sys_user c
+        on
+            a.user_id = c.user_id
+        left join
+            t_sys_user d
+        on
+            b.user_id = d.user_id
+        left join
+            t_sys_user e
+        on
+            b.be_user_id = e.user_id
+        where
+            a.last_comment_id = 0
+            and a.media_id = #{mediaId}
+        order by a.gmt_create desc
+    </select>
+    <!--对媒体进行评价-->
+    <insert id="actionMediaComment" parameterType="com.xzsd.pc.comment.entity.CommentInfo">
+        insert into t_sys_comment
+            (
+            comment_id,
+            user_id,
+            be_user_id,
+            media_id,
+            comment,
+            last_comment_id,
+            is_deleted,
+            create_by,
+            gmt_create,
+            last_modified_by,
+            gmt_modified,
+            version
+            )
+        values
+            (
+            #{commentId},
+            #{userId},
+            #{beUserId},
+            #{mediaId},
+            #{comment},
+            #{lastCommentId},
+            0,
+            #{createBy},
+            now(),
+            #{lastModifiedBy},
+            now(),
+            0
+            )
+    </insert>
+</mapper>

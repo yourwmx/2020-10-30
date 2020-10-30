@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neusoft.webauth.user.dao.UserDao">
+    <!--校验openid是否存在-->
+    <select id="countUserOpenid" parameterType="com.neusoft.webauth.user.entity.UserInfo" resultType="int">
+        select
+            count(*)
+        from
+            t_sys_user
+        where
+            is_deleted = 0
+            and user_id = #{userId}
+    </select>
+    <!--校验账号是否存在-->
+    <select id="countUser" parameterType="com.neusoft.webauth.user.entity.UserInfo" resultType="int">
+        select
+            count(*)
+        from
+            t_sys_user
+        where
+            is_deleted = 0
+        <if test="account != null and account != ''">
+            and account = #{account}
+        </if>
+        <if test="userId != null and userId != ''">
+            and user_id != #{userId}
+        </if>
+        <if test="douyinId != null and douyinId != ''">
+            and douyin_id = #{douyinId}
+        </if>
+    </select>
+    <!--用户注册-->
+    <insert id="addUser" parameterType="com.neusoft.webauth.user.entity.UserInfo">
+        insert into t_sys_user
+            (
+            user_id,
+            account,
+            password,
+            role,
+            name,
+            sex,
+            self_introduce,
+            birthday,
+            location_id,
+            photo,
+            background_url,
+            is_deleted,
+            create_by,
+            gmt_create,
+            last_modified_by,
+            gmt_modified,
+            version
+            )
+        values
+            (
+            #{userId},
+            #{account},
+            #{password},
+            #{role},
+            #{name},
+            #{sex},
+            #{selfIntroduce},
+            #{birthday},
+            #{locationId},
+            #{photo},
+            #{backgroundUrl},
+            0,
+            #{createBy},
+            now(),
+            #{lastModifiedBy},
+            now(),
+            0
+            )
+    </insert>
+    <!--个人信息查询-->
+    <select id="findUserById" parameterType="java.lang.String" resultType="com.neusoft.webauth.user.entity.UserInfo">
+        select
+            a.user_id userId,
+            photo,
+            account,
+            sex,
+            douyin_id douyinId,
+            self_introduce selfIntroduce,
+            location_id locationId,
+            v locationCity,
+            birthday,
+            year(now())-year(birthday) age,
+            background_url backgroundUrl,
+            a.version
+        from
+            t_sys_user a
+        left join
+            t_sys_dictionary b
+        on
+            a.location_id = b.dictionary_id
+        where
+            a.user_id = #{userId}
+    </select>
+    <!--修改用户-->
+    <update id="updateUserById" parameterType="com.neusoft.webauth.user.entity.UserInfo">
+        update
+            t_sys_user
+        set
+            account = #{account},
+            douyin_id = #{douyinId},
+            self_introduce = #{selfIntroduce},
+            sex = #{sex},
+            birthday = #{birthday},
+            location_id = #{locationId},
+            background_url = #{backgroundUrl},
+            last_modified_by    = #{lastModifiedBy},
+            gmt_modified    = now(),
+            version         = version + 1
+        where
+            user_id = #{userId}
+            and version = #{version}
+    </update>
+</mapper>
