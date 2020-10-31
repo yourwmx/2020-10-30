@@ -49,6 +49,10 @@ public class CommentInfo {
      */
     private String lastCommentId;
     /**
+     * 点赞评论数量
+     */
+    private String countLikeComment;
+    /**
      * 二级评论列表
      */
     private List<CommentInfo> secondCommentList;
@@ -219,5 +223,13 @@ public class CommentInfo {
 
     public void setBeUserAccount(String beUserAccount) {
         this.beUserAccount = beUserAccount;
+    }
+
+    public String getCountLikeComment() {
+        return countLikeComment;
+    }
+
+    public void setCountLikeComment(String countLikeComment) {
+        this.countLikeComment = countLikeComment;
     }
 }
