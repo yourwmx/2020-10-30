@@ -82,7 +82,7 @@ public class MediaController {
         //获得文件后缀名
         String a = file.getOriginalFilename().substring(begin, last);
         //获取当前登录人编号
-        String userId = SecurityUtils.getCurrentUserId();
+        String userId = mediaInfo.getUserId();
         mediaInfo.setUserId(userId);
         mediaInfo.setCreateBy(userId);
         String filePath = null;

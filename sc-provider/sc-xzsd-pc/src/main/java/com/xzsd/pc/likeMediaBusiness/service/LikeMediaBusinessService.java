@@ -22,9 +22,8 @@ public class LikeMediaBusinessService {
      * wumaoxing
      * 2020-10-25 18:57
      */
-    public AppResponse queryLikeMediaBusinessId(String mediaId) {
+    public AppResponse queryLikeMediaBusinessId(String mediaId, String userId) {
         List<String> listMediaId = Arrays.asList(mediaId.split(","));
-        String userId = SecurityUtils.getCurrentUserId();
         return AppResponse.success("查询成功！", likeMediaBusinessDao.queryLikeMediaBusinessId(listMediaId, userId));
     }
 
@@ -34,9 +33,7 @@ public class LikeMediaBusinessService {
      * 2020-10-26 16:23
      */
     public AppResponse addLikeMediaBusiness(LikeMediaBusinessInfo likeMediaBusinessInfo) {
-        String userId = SecurityUtils.getCurrentUserId();
-        likeMediaBusinessInfo.setLikeUserId(userId);
-        likeMediaBusinessInfo.setCreateBy(userId);
+        likeMediaBusinessInfo.setCreateBy(likeMediaBusinessInfo.getLikeUserId());
         likeMediaBusinessInfo.setLikeMediaBusinessId(StringUtil.getCommonCode(2));
         // 新增数据
         int count = likeMediaBusinessDao.addLikeMediaBusiness(likeMediaBusinessInfo);
@@ -52,9 +49,7 @@ public class LikeMediaBusinessService {
      * 2020-10-26 17:09
      */
     public AppResponse deleteLikeMediaBusiness(LikeMediaBusinessInfo likeMediaBusinessInfo) {
-        String userId = SecurityUtils.getCurrentUserId();
-        likeMediaBusinessInfo.setLikeUserId(userId);
-        likeMediaBusinessInfo.setLastModifiedBy(userId);
+        likeMediaBusinessInfo.setLastModifiedBy(likeMediaBusinessInfo.getLikeUserId());
         // 删除数据
         int count = likeMediaBusinessDao.deleteLikeMediaBusiness(likeMediaBusinessInfo);
         if(0 == count) {

@@ -27,9 +27,9 @@ public class LikeMediaBusinessController {
      * 2020-10-25 18:51
      */
     @RequestMapping("queryLikeMediaBusinessId")
-    public AppResponse queryLikeMediaBusinessId(String mediaId) {
+    public AppResponse queryLikeMediaBusinessId(String mediaId, String userId) {
         try {
-            return likeMediaBusinessService.queryLikeMediaBusinessId(mediaId);
+            return likeMediaBusinessService.queryLikeMediaBusinessId(mediaId, userId);
         } catch (Exception e) {
             logger.error("获取点赞媒体业务编号成功", e);
             throw new ScServerException("查询错误，请重试");

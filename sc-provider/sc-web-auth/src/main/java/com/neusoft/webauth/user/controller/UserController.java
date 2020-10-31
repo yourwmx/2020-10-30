@@ -67,9 +67,9 @@ public class UserController {
      * 2020-08-20 20:51
      */
     @RequestMapping(value = "findUserById")
-    public AppResponse findUserById() {
+    public AppResponse findUserById(String userId) {
         try {
-            return userService.findUserById();
+            return userService.findUserById(userId);
         } catch (Exception e) {
             logger.error("查询个人信息异常", e);
             System.out.println(e.toString());

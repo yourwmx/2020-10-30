@@ -17,7 +17,18 @@ public class StaticAuthorizeConfigProvider implements AuthorizeConfigProvider {
     public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
         config
                 .antMatchers("/**/favicon.ico", "/js/**", "/css/**", "/img/**", "/html/**", "/error/**","/**/static/media/**","/**/static/music/**").permitAll()
-                .antMatchers("/druid/**", "/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs","/**/media/addFile","/**/media/listMedias","/**/user/login","/**/user/addUser").permitAll();
+                .antMatchers("/druid/**", "/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs").permitAll()
+                .antMatchers("/**/media/addFile","/**/media/addMedia","/**/media/listMedias","/**/user/login","/**/user/addUser").permitAll()
+                .antMatchers("/**/likeMediaBusiness/queryLikeMediaBusinessId","/**/likeMediaBusiness/addLikeMediaBusiness","/**/likeMediaBusiness/deleteLikeMediaBusiness").permitAll()
+                .antMatchers("/**/focusUserBusiness/queryFocusUserBusinessId","/**/focusUserBusiness/addFocusUserBusiness","/**/focusUserBusiness/deleteFocusUserBusiness").permitAll()
+                .antMatchers("/**/comment/listComments","/**/comment/actionMediaComment","/**/music/listMusics").permitAll()
+                .antMatchers("/**/likeCommentBusiness/queryLikeCommentBusinessId","/**/likeCommentBusiness/addLikeCommentBusiness","/**/likeCommentBusiness/deleteLikeCommentBusiness").permitAll()
+                .antMatchers("/**/user/findUserById","/**/user/updateUserById","/**/dictionary/querySiteLocalClassify").permitAll()
+
+
+
+        ;
+
         return false;
     }
 

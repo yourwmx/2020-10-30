@@ -146,8 +146,7 @@ public class UserService {
      * wumaoxing
      * 2020-03-26 20:52
      */
-    public AppResponse findUserById() {
-        String userId = SecurityUtils.getCurrentUserId();
+    public AppResponse findUserById(String userId) {
         UserInfo userInfo = userDao.findUserById(userId);
         MediaInfo mediaInfo = new MediaInfo();
         mediaInfo.setUserId(userId);
@@ -170,7 +169,6 @@ public class UserService {
         // 密码加密
 //        String password = PasswordUtils.generatePassword(userInfo.getPassword());
 //        userInfo.setPassword(password);
-        userInfo.setLastModifiedBy(SecurityUtils.getCurrentUserId());
         // 修改用户
         int count = userDao.updateUserById(userInfo);
         if(0 == count) {

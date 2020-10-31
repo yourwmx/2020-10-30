@@ -27,9 +27,9 @@ public class LikeCommentBusinessController {
      * 2020-10-30 11:19
      */
     @RequestMapping("queryLikeCommentBusinessId")
-    public AppResponse queryLikeCommentBusinessId(String commentId) {
+    public AppResponse queryLikeCommentBusinessId(String commentId, String userId) {
         try {
-            return likeCommentBusinessService.queryLikeCommentBusinessId(commentId);
+            return likeCommentBusinessService.queryLikeCommentBusinessId(commentId, userId);
         } catch (Exception e) {
             logger.error("获取点赞评论业务编号成功", e);
             throw new ScServerException("查询错误，请重试");

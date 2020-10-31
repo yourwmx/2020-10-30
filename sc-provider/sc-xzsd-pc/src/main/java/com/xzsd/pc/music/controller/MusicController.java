@@ -48,8 +48,8 @@ public class MusicController {
             //以时间戳和两位随机数作为文件名
             fileName = StringUtil.getCommonCode(2)+".mp3";
             musicInfo.setMusicUrl("/pc/static/music/"+fileName);
-            filePath = "F:/毕业设计/idea/douyin/sc-provider/sc-xzsd-pc/src/main/resources/static/music/";
-//          filePath = "C:/Users/Administrator/Desktop/douyin/sc-provider/sc-xzsd-pc/src/main/resources/static/music/";
+//            filePath = "F:/毕业设计/idea/douyin/sc-provider/sc-xzsd-pc/src/main/resources/static/music/";
+            filePath = "C:/Users/Administrator/Desktop/douyin/sc-provider/sc-xzsd-pc/src/main/resources/static/music/";
             musicService.addMusic(musicInfo);
         }
         System.out.println(fileName);

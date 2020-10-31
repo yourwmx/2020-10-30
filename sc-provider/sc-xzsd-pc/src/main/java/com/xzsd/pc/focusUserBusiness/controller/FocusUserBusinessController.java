@@ -27,9 +27,9 @@ public class FocusUserBusinessController {
      * 2020-10-27 15:37
      */
     @RequestMapping("queryFocusUserBusinessId")
-    public AppResponse queryFocusUserBusinessId(String userId) {
+    public AppResponse queryFocusUserBusinessId(String userId, String focusUserId) {
         try {
-            return focusUserBusinessService.queryFocusUserBusinessId(userId);
+            return focusUserBusinessService.queryFocusUserBusinessId(userId, focusUserId);
         } catch (Exception e) {
             logger.error("获取关注用户业务编号成功", e);
             throw new ScServerException("查询错误，请重试");

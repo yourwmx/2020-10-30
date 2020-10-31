@@ -22,9 +22,8 @@ public class LikeCommentBusinessService {
      * wumaoxing
      * 2020-10-30 11:23
      */
-    public AppResponse queryLikeCommentBusinessId(String commentId) {
+    public AppResponse queryLikeCommentBusinessId(String commentId, String userId) {
         List<String> listCommentId = Arrays.asList(commentId.split(","));
-        String userId = SecurityUtils.getCurrentUserId();
         return AppResponse.success("查询成功！", likeCommentBusinessDao.queryLikeCommentBusinessId(listCommentId, userId));
     }
 
@@ -34,9 +33,7 @@ public class LikeCommentBusinessService {
      * 2020-10-30 11:23
      */
     public AppResponse addLikeCommentBusiness(LikeCommentBusinessInfo likeCommentBusinessInfo) {
-        String userId = SecurityUtils.getCurrentUserId();
-        likeCommentBusinessInfo.setLikeUserId(userId);
-        likeCommentBusinessInfo.setCreateBy(userId);
+        likeCommentBusinessInfo.setCreateBy(likeCommentBusinessInfo.getLikeUserId());
         likeCommentBusinessInfo.setLikeCommentBusinessId(StringUtil.getCommonCode(2));
         // 新增数据
         int count = likeCommentBusinessDao.addLikeCommentBusiness(likeCommentBusinessInfo);
@@ -52,9 +49,8 @@ public class LikeCommentBusinessService {
      * 2020-10-30 11:23
      */
     public AppResponse deleteLikeCommentBusiness(LikeCommentBusinessInfo likeCommentBusinessInfo) {
-        String userId = SecurityUtils.getCurrentUserId();
-        likeCommentBusinessInfo.setLikeUserId(userId);
-        likeCommentBusinessInfo.setLastModifiedBy(userId);
+        likeCommentBusinessInfo.setLikeUserId(likeCommentBusinessInfo.getLikeUserId());
+        likeCommentBusinessInfo.setLastModifiedBy(likeCommentBusinessInfo.getLikeUserId());
         // 删除数据
         int count = likeCommentBusinessDao.deleteLikeCommentBusiness(likeCommentBusinessInfo);
         if(0 == count) {

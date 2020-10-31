@@ -22,9 +22,8 @@ public class FocusUserBusinessService {
      * wumaoxing
      * 2020-10-27 16:06
      */
-    public AppResponse queryFocusUserBusinessId(String userId) {
+    public AppResponse queryFocusUserBusinessId(String userId, String focusUserId) {
         List<String> listUserId = Arrays.asList(userId.split(","));
-        String focusUserId = SecurityUtils.getCurrentUserId();
         return AppResponse.success("查询成功！", focusUserBusinessDao.queryFocusUserBusinessId(listUserId, focusUserId));
     }
 
@@ -34,9 +33,7 @@ public class FocusUserBusinessService {
      * 2020-10-27 16:07
      */
     public AppResponse addFocusUserBusiness(FocusUserBusinessInfo focusUserBusinessInfo) {
-        String userId = SecurityUtils.getCurrentUserId();
-        focusUserBusinessInfo.setFocusUserId(userId);
-        focusUserBusinessInfo.setCreateBy(userId);
+        focusUserBusinessInfo.setCreateBy(focusUserBusinessInfo.getFocusUserId());
         focusUserBusinessInfo.setFocusUserBusinessId(StringUtil.getCommonCode(2));
         // 新增数据
         int count = focusUserBusinessDao.addFocusUserBusiness(focusUserBusinessInfo);
@@ -52,9 +49,7 @@ public class FocusUserBusinessService {
      * 2020-10-27 16:07
      */
     public AppResponse deleteFocusUserBusiness(FocusUserBusinessInfo focusUserBusinessInfo) {
-        String userId = SecurityUtils.getCurrentUserId();
-        focusUserBusinessInfo.setFocusUserId(userId);
-        focusUserBusinessInfo.setLastModifiedBy(userId);
+        focusUserBusinessInfo.setLastModifiedBy(focusUserBusinessInfo.getFocusUserId());
         // 删除数据
         int count = focusUserBusinessDao.deleteFocusUserBusiness(focusUserBusinessInfo);
         if(0 == count) {

@@ -29,9 +29,7 @@ public class CommentController {
     @PostMapping(value = "actionMediaComment")
     public AppResponse actionMediaComment(CommentInfo commentInfo) {
         try {
-            String userId = SecurityUtils.getCurrentUserId();
-            commentInfo.setUserId(userId);
-            commentInfo.setCreateBy(userId);
+            commentInfo.setCreateBy(commentInfo.getUserId());
             return commentService.actionMediaComment(commentInfo);
         } catch (Exception e) {
             logger.error("对媒体进行评价异常", e);
