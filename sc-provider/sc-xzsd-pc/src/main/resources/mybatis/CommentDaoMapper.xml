@@ -10,6 +10,7 @@
         <result property="account" column="account"></result>
         <result property="photo" column="photo"></result>
         <result property="lastCommentId" column="last_comment_id"></result>
+        <result property="countLikeComment" column="countLikeComment"></result>
         <collection property="secondCommentList" ofType="com.xzsd.pc.comment.entity.CommentInfo">
             <id column="comment_ids" property="commentId"></id>
             <result column="comments" property="comment"></result>
@@ -20,6 +21,7 @@
             <result column="accounts" property="account"></result>
             <result column="photos" property="photo"></result>
             <result column="last_comment_ids" property="lastCommentId"></result>
+            <result column="countLikeComments" property="countLikeComment"></result>
         </collection>
     </resultMap>
     <select id="listComments" resultMap="commentMap">
@@ -30,6 +32,7 @@
             a.comment_id,
             a.comment,
             a.gmt_create,
+            f.countLikeComment,
             a.last_comment_id,
             d.user_id user_ids,
             d.account accounts,
@@ -39,7 +42,8 @@
             b.be_user_id,
             e.account be_user_account,
             b.gmt_create gmt_greates,
-            b.last_comment_id last_comment_ids
+            b.last_comment_id last_comment_ids,
+            g.countLikeComments
         from
             t_sys_comment a
         left join
@@ -59,6 +63,28 @@
             t_sys_user e
         on
             b.be_user_id = e.user_id
+        left join
+			(select
+				comment_id commentId,
+				count(*) countLikeComment
+			from
+			    t_sys_like_comment_business
+			where
+			    is_deleted = 0
+			group by comment_id) f
+		on
+		    a.comment_id = f.commentId
+		left join
+			(select
+				comment_id commentId,
+				count(*) countLikeComments
+			from
+			    t_sys_like_comment_business
+			where
+			    is_deleted = 0
+			group by comment_id) g
+		on
+		    b.comment_id = g.commentId
         where
             a.last_comment_id = 0
             and a.media_id = #{mediaId}

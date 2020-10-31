@@ -6,15 +6,18 @@
     <!--    获取文件列表-->
     <select id="listMedias" parameterType="com.neusoft.webauth.media.entity.MediaInfo" resultType="com.neusoft.webauth.media.entity.MediaInfo">
         select
-            media_id mediaId,
+            a.media_id mediaId,
             media_url mediaUrl,
+            a.user_id userId,
             account,
             photo,
             media_introduce mediaIntroduce,
             media_thumb mediaThumb,
             music_url musicUrl,
             music_name musicName,
-            music_poster musicPoster
+            music_poster musicPoster,
+            d.countLikeMedia likeNumber,
+            e.countComment commentNumber
         from
             t_sys_media a
         left join
@@ -25,8 +28,32 @@
             t_sys_user c
         on
             a.user_id = c.user_id
+        left join
+            (select
+                media_id mediaId,
+                count(*) countLikeMedia
+            from
+                t_sys_like_media_business
+            where
+                is_deleted = 0
+            group by media_id) d
+        on
+            a.media_id = d.mediaId
+        left join
+            (select
+                media_id mediaId,
+                count(*) countComment
+            from
+                t_sys_comment
+            where
+                is_deleted = 0
+            group by media_id) e
+        on
+            a.media_id = e.mediaId
         where
             a.is_deleted = 0
+        <if test="userId != null and userId != ''">
             and a.user_id = #{userId}
+        </if>
     </select>
 </mapper>
