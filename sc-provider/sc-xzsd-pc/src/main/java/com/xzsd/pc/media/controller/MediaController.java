@@ -99,8 +99,8 @@ public class MediaController {
         }
         mediaInfo.setMediaId(mediaId);
         mediaInfo.setMediaUrl("/pc/static/media/" + fileName);
-        filePath = "F:/毕业设计/idea/douyin/sc-provider/sc-xzsd-pc/src/main/resources/static/media/";
-//          filePath = "C:/Users/Administrator/Desktop/douyin/sc-provider/sc-xzsd-pc/src/main/resources/static/media/";
+//        filePath = "F:/毕业设计/idea/douyin/sc-provider/sc-xzsd-pc/src/main/resources/static/media/";
+          filePath = "C:/Users/Administrator/Desktop/douyin/sc-provider/sc-xzsd-pc/src/main/resources/static/media/";
         //若不是缩略图，则写入media表中
         if("0".compareTo(mediaInfo.getIsMediaThumb()) == 0){
             mediaService.addMedia(mediaInfo);

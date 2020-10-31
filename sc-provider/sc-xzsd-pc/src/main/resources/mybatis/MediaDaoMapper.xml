@@ -12,6 +12,7 @@
                 user_id,
                 media_introduce,
                 media_thumb,
+                is_media_thumb,
                 music_id,
                 like_number,
                 comment_number,
@@ -29,6 +30,7 @@
                 #{userId},
                 #{mediaIntroduce},
                 #{mediaThumb},
+                #{isMediaThumb},
                 #{musicId},
                 0,
                 0,
@@ -90,6 +92,7 @@
             a.media_id = e.mediaId
         where
             a.is_deleted = 0
+            and a.is_media_thumb = 0
         <if test="userId != null and userId != ''">
             and a.user_id = #{userId}
         </if>
