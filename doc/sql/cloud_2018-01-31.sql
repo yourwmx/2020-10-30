@@ -46,7 +46,7 @@ LOCK TABLES `oauth_client_details` WRITE;
 
 INSERT INTO `oauth_client_details` (`id`, `client_id`, `resource_ids`, `client_secret`, `scope`, `authorized_grant_types`, `web_server_redirect_uri`, `authorities`, `access_token_validity`, `refresh_token_validity`, `additional_information`, `autoapprove`)
 VALUES
-	(1,'webapp','','webapp','read,write','password,refresh_token',NULL,'admin',3600,7200,'{}','true'),
+	(1,'webapp','','webapp','read,write','password,refresh_token',NULL,'admin',31536000,31536000,'{}','true'),
 	(2,'gateway',NULL,'gateway','xx','implicit',NULL,NULL,NULL,NULL,NULL,'true');
 
 /*!40000 ALTER TABLE `oauth_client_details` ENABLE KEYS */;
