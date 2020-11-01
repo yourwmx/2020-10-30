@@ -133,6 +133,8 @@ public class UserService {
         if(userInfo.getUserId() == null){
             userInfo.setUserId(UUIDUtils.getUUID());
         }
+        // 默认生日
+        userInfo.setBirthday("2020-01-01");
         // 新增用户
         int count = userDao.addUser(userInfo);
         if(0 == count) {
