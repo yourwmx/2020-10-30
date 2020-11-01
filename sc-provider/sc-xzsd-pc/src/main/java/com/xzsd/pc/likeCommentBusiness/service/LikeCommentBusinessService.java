@@ -49,7 +49,6 @@ public class LikeCommentBusinessService {
      * 2020-10-30 11:23
      */
     public AppResponse deleteLikeCommentBusiness(LikeCommentBusinessInfo likeCommentBusinessInfo) {
-        likeCommentBusinessInfo.setLikeUserId(likeCommentBusinessInfo.getLikeUserId());
         likeCommentBusinessInfo.setLastModifiedBy(likeCommentBusinessInfo.getLikeUserId());
         // 删除数据
         int count = likeCommentBusinessDao.deleteLikeCommentBusiness(likeCommentBusinessInfo);

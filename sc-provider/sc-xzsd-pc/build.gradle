@@ -8,9 +8,13 @@ dependencies {
             project(':sc-common:sc-common-client'),
             project(":sc-common:sc-common-log"),
             'org.springframework.boot:spring-boot-starter-data-redis',
-            'org.springframework.session:spring-session-data-redis'
+            'org.springframework.session:spring-session-data-redis',
+            'org.springframework.boot:spring-boot-devtools'
     // https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api
     compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0-m02'
 
+    bootRun {
+        addResources = true
+    }
 
 }

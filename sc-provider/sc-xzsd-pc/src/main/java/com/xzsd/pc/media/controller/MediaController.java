@@ -53,8 +53,8 @@ public class MediaController {
         }
         mediaInfo.setMediaId(mediaId);
         mediaInfo.setMediaUrl("/pc/static/media/" + fileName);
-        filePath = "F:/毕业设计/idea/douyin/sc-provider/sc-xzsd-pc/src/main/resources/static/media/";
-//          filePath = "C:/Users/Administrator/Desktop/douyin/sc-provider/sc-xzsd-pc/src/main/resources/static/media/";
+//        filePath = "F:/毕业设计/idea/douyin/sc-provider/sc-xzsd-pc/src/main/resources/static/media/";
+        filePath = "C:/Users/Administrator/Desktop/douyin/sc-provider/sc-xzsd-pc/src/main/resources/static/media/";
         File dest = new File(filePath + fileName);
         try {
             file.transferTo(dest);
