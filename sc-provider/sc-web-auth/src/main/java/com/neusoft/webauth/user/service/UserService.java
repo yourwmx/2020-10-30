@@ -135,6 +135,8 @@ public class UserService {
         }
         // 默认生日
         userInfo.setBirthday("2020-01-01");
+        // 默认地区（佛山）
+        userInfo.setLocationCity("440600");
         // 新增用户
         int count = userDao.addUser(userInfo);
         if(0 == count) {
