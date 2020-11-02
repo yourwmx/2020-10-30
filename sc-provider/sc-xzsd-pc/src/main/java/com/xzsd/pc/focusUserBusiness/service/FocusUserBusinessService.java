@@ -57,4 +57,13 @@ public class FocusUserBusinessService {
         }
         return AppResponse.success("删除成功！");
     }
+
+    /**
+     * 获取关注用户列表
+     * wumaoxing
+     * 2020-11-2 13:48
+     */
+    public AppResponse listFocusUserIds(String focusUserId) {
+        return AppResponse.success("查询成功！", focusUserBusinessDao.listFocusUserIds(focusUserId));
+    }
 }

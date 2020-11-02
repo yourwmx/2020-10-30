@@ -24,4 +24,10 @@ public interface FocusUserBusinessDao {
      * 2020-10-27 16:13
      */
     int deleteFocusUserBusiness(FocusUserBusinessInfo focusUserBusinessInfo);
+    /**
+     * 获取关注用户列表
+     * wumaoxing
+     * 2020-11-2 13:52
+     */
+    List<FocusUserBusinessInfo> listFocusUserIds(String focusUserId);
 }

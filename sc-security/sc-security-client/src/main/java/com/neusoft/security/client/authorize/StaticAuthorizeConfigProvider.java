@@ -24,7 +24,7 @@ public class StaticAuthorizeConfigProvider implements AuthorizeConfigProvider {
                 .antMatchers("/**/comment/listComments","/**/comment/actionMediaComment","/**/music/listMusics").permitAll()
                 .antMatchers("/**/likeCommentBusiness/queryLikeCommentBusinessId","/**/likeCommentBusiness/addLikeCommentBusiness","/**/likeCommentBusiness/deleteLikeCommentBusiness").permitAll()
                 .antMatchers("/**/user/findUserById","/**/user/updateUserById","/**/dictionary/querySiteLocalClassify").permitAll()
-
+                .antMatchers("/**/focusUserBusiness/listFocusUserIds").permitAll()
 
 
         ;

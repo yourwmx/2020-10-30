@@ -65,4 +65,19 @@ public class FocusUserBusinessController {
             throw new ScServerException("关注->取消关注错误，请重试");
         }
     }
+
+    /**
+     * 获取关注用户编号列表
+     * wumaoxing
+     * 2020-11-2 13:45
+     */
+    @RequestMapping("listFocusUserIds")
+    public AppResponse listFocusUserIds(String focusUserId) {
+        try {
+            return focusUserBusinessService.listFocusUserIds(focusUserId);
+        } catch (Exception e) {
+            logger.error("获取关注用户业务编号成功", e);
+            throw new ScServerException("查询错误，请重试");
+        }
+    }
 }

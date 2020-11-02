@@ -60,4 +60,14 @@
             and be_focus_user_id = #{beFocusUserId}
             and is_deleted = 0
     </update>
+    <!--获取关注用户列表-->
+    <select id="listFocusUserIds" parameterType="java.lang.String" resultType="com.xzsd.pc.focusUserBusiness.entity.FocusUserBusinessInfo">
+        select
+            be_focus_user_id beFocusUserId
+        from
+            t_sys_focus_user_business
+        where
+            is_deleted = 0
+            and focus_user_id = #{focusUserId}
+    </select>
 </mapper>
