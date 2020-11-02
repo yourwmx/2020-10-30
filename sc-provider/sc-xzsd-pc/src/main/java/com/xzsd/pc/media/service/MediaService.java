@@ -39,8 +39,8 @@ public class MediaService {
      * wumaoxing
      * 2020-10-15 22:04
      */
-    public AppResponse listMedias(MediaInfo mediaInfo) {
-        List<MediaInfo> mediaInfoList = mediaDao.listMedias(mediaInfo);
+    public AppResponse listMedias(List<String> listUserId) {
+        List<MediaInfo> mediaInfoList = mediaDao.listMedias(listUserId);
         return AppResponse.success("查询成功！", getPageInfo(mediaInfoList));
     }
 

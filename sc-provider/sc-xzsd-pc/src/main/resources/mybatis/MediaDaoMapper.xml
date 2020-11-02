@@ -39,7 +39,7 @@
             )
     </insert>
     <!--    获取文件列表-->
-    <select id="listMedias" parameterType="com.xzsd.pc.media.entity.MediaInfo"
+    <select id="listMedias" parameterType="java.util.List"
             resultType="com.xzsd.pc.media.entity.MediaInfo">
         select
             a.media_id mediaId,
@@ -89,8 +89,11 @@
         where
             a.is_deleted = 0
             and a.is_media_thumb = 0
-        <if test="userId != null and userId != ''">
-            and a.user_id = #{userId}
+        <if test="listUserId != null and listUserId != ''">
+            and a.user_id in
+            <foreach item="item" index="index" collection="listUserId" open="(" separator="," close=")">
+                #{item}
+            </foreach>
         </if>
     </select>
     <!--删除文件-->

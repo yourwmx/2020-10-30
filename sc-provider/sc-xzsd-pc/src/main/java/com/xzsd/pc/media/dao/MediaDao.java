@@ -17,7 +17,7 @@ public interface MediaDao {
      * wumaoxing
      * 2020-10-15 22:06
      */
-    List<MediaInfo> listMedias(MediaInfo mediaInfo);
+    List<MediaInfo> listMedias(List<String> listUserId);
     /**
      * 删除文件信息
      * wumaoxing

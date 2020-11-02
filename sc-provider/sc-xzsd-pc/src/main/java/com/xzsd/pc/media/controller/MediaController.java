@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @RequestMapping("media")
@@ -123,8 +125,9 @@ public class MediaController {
      */
     @RequestMapping("listMedias")
     public AppResponse listMedias(MediaInfo mediaInfo) {
+        List<String> listUserId = Arrays.asList(mediaInfo.getUserId().split(","));
         try {
-            return mediaService.listMedias(mediaInfo);
+            return mediaService.listMedias(listUserId);
         } catch (Exception e) {
             logger.error("文件获取异常", e);
             throw new ScServerException("查询错误，请重试");
