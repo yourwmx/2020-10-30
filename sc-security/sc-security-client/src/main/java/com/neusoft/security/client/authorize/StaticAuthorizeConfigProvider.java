@@ -18,7 +18,7 @@ public class StaticAuthorizeConfigProvider implements AuthorizeConfigProvider {
         config
                 .antMatchers("/**/favicon.ico", "/js/**", "/css/**", "/img/**", "/html/**", "/error/**","/**/static/media/**","/**/static/music/**").permitAll()
                 .antMatchers("/druid/**", "/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs").permitAll()
-                .antMatchers("/**/media/addFile","/**/media/addMedia","/**/media/listMedias","/**/user/login","/**/user/addUser").permitAll()
+                .antMatchers("/**/media/addFile","/**/media/addMedia","/**/media/listMedias","/**/user/login","/**/user/addUser","/**/user/listUsers").permitAll()
                 .antMatchers("/**/likeMediaBusiness/queryLikeMediaBusinessId","/**/likeMediaBusiness/addLikeMediaBusiness","/**/likeMediaBusiness/deleteLikeMediaBusiness").permitAll()
                 .antMatchers("/**/focusUserBusiness/queryFocusUserBusinessId","/**/focusUserBusiness/addFocusUserBusiness","/**/focusUserBusiness/deleteFocusUserBusiness").permitAll()
                 .antMatchers("/**/comment/listComments","/**/comment/actionMediaComment","/**/music/listMusics").permitAll()
