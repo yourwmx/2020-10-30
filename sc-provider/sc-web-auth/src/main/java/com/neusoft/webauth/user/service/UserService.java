@@ -180,4 +180,13 @@ public class UserService {
         }
         return AppResponse.success("修改成功！");
     }
+
+    /**
+     * 用户列表
+     * wumaoxing
+     * 2021-02-28 14:06
+     */
+    public AppResponse listUsers(UserInfo userInfo) {
+        return AppResponse.success("查询成功！", userDao.listUsers(userInfo));
+    }
 }

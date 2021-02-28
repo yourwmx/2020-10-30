@@ -89,7 +89,7 @@
         where
             a.is_deleted = 0
             and a.is_media_thumb = 0
-        <if test="listUserId != null and listUserId != ''">
+        <if test="listUserId[0] != null and listUserId[0] != ''">
             and a.user_id in
             <foreach item="item" index="index" collection="listUserId" open="(" separator="," close=")">
                 #{item}

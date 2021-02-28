@@ -2,6 +2,8 @@ package com.neusoft.webauth.user.dao;
 
 import com.neusoft.webauth.user.entity.UserInfo;
 
+import java.util.List;
+
 public interface UserDao {
     /**
      * 校验账号是否存在
@@ -33,4 +35,10 @@ public interface UserDao {
      * 2020-10-24 15:47
      */
     int updateUserById(UserInfo userInfo);
+    /**
+     * 用户列表
+     * wumaoxing
+     * 2021-02-28 14:08
+     */
+    List<UserInfo> listUsers(UserInfo userInfo);
 }

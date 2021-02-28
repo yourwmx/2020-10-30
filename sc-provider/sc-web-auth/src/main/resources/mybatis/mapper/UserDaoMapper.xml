@@ -117,4 +117,23 @@
             user_id = #{userId}
             and version = #{version}
     </update>
+    <!--用户列表-->
+    <select id="listUsers" parameterType="com.neusoft.webauth.user.entity.UserInfo" resultType="com.neusoft.webauth.user.entity.UserInfo">
+        select
+            a.photo,
+            a.name,
+            a.douyin_id douyinId,
+            ifnull(b.fans,0) fans
+        from
+            t_sys_user a
+        left join
+        (select be_focus_user_id,count(*) fans from t_sys_focus_user_business
+        where is_deleted = 0 group by be_focus_user_id) b
+        on
+            a.user_id = b.be_focus_user_id
+            and a.is_deleted = 0
+        <if test="role != null and role != ''">
+            and a.role = #{role}
+        </if>
+    </select>
 </mapper>

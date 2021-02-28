@@ -92,4 +92,20 @@ public class UserController {
             throw new ScServerException(e);
         }
     }
+
+    /**
+     * 用户列表
+     * wumaoxing
+     * 2021-02-28 14:04
+     */
+    @RequestMapping(value = "listUsers")
+    public AppResponse listUsers(UserInfo userInfo) {
+        try {
+            return userService.listUsers(userInfo);
+        } catch (Exception e) {
+            logger.error("查询用户列表异常", e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
 }
