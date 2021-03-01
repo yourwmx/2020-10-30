@@ -11,6 +11,14 @@ dependencies {
             'org.springframework.session:spring-session-data-redis',
             'org.springframework.boot:spring-boot-devtools'
             'net.sf.json-lib”%“json-lib” %“2.4'
+            'org.apache.commons:commons-lang3'
+            'commons-io:commons-io:2.6'
+            'commons-fileupload:commons-fileupload:1.4'
+            annotationProcessor 'org.projectlombok:lombok:1.18.2'
+            compileOnly 'org.projectlombok:lombok:1.18.2'
+    // https://mvnrepository.com/artifact/io.minio/minio
+    implementation group: 'io.minio', name: 'minio', version: '8.0.3'
+
     // https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api
     compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0-m02'
 

@@ -76,3 +76,8 @@ sc:
     swagger:
       enabled: true
       description: 'spring cloud 模板项目'
+minio:
+  endpoint: http://119.29.39.195:9000
+  accessKey: minioadmin
+  secretKey: minioadmin
+  filHost: 119.29.39.195
