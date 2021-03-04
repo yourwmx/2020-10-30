@@ -18,7 +18,7 @@ dependencies {
             compileOnly 'org.projectlombok:lombok:1.18.2'
     // https://mvnrepository.com/artifact/io.minio/minio
     implementation group: 'io.minio', name: 'minio', version: '8.0.3'
-
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.0'
     // https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api
     compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0-m02'
 

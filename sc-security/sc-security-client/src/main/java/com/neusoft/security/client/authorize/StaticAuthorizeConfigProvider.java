@@ -26,7 +26,7 @@ public class StaticAuthorizeConfigProvider implements AuthorizeConfigProvider {
                 .antMatchers("/**/user/findUserById","/**/user/updateUserById","/**/dictionary/querySiteLocalClassify").permitAll()
                 .antMatchers("/**/focusUserBusiness/listFocusUserIds").permitAll()
                 .antMatchers("/**/file/upload").permitAll()
-
+                .antMatchers("/**/file/**").permitAll()
 
         ;
 

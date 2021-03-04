@@ -42,14 +42,14 @@ public class MinioController {
      */
     @ApiOperation("上传文件-minio")
     @PostMapping("/upload")
-    public AppResponse upload(@RequestParam(name = "file", required = false) MultipartFile file, @RequestParam(required = true) String bucketName) {
+    public AppResponse upload(@RequestParam(name = "file", required = false) MultipartFile file, @RequestParam(required = true) String bucketName, @RequestParam(required = false) String dir) {
         FileUploadResponse response = null;
         if (StringUtils.isBlank(bucketName)) {
             bucketName = "salt";
         }
         try {
             System.out.println("执行...上传文件");
-            response = minioUtil.uploadFile(file, bucketName);
+            response = minioUtil.uploadFile(file, bucketName, dir);
         } catch (Exception e) {
             log.error("上传失败 : [{}]", Arrays.asList(e.getStackTrace()));
             System.out.println("上传失败 : [{}]"+Arrays.asList(e.getStackTrace()));

@@ -49,7 +49,7 @@ public class MinioUtil {
     /**
      * 上传文件
      */
-    public FileUploadResponse uploadFile(MultipartFile file, String bucketName) throws Exception {
+    public FileUploadResponse uploadFile(MultipartFile file, String bucketName, String dir) throws Exception {
 
         System.out.println("执行了util");
         //判断文件是否为空
@@ -70,13 +70,13 @@ public class MinioUtil {
         //开始上传
         System.out.println("文件fiename"+fileName);
         client.putObject(
-                PutObjectArgs.builder().bucket(bucketName).object(fileName).stream(
+                PutObjectArgs.builder().bucket(bucketName).object(dir+fileName).stream(
                         file.getInputStream(), file.getSize(), -1)
                         .contentType(file.getContentType())
                         .build());
         System.out.println("执行完毕.");
-        String url = minioProp.getEndpoint() + "/" + bucketName + "/" + fileName;
-        String urlHost = minioProp.getFilHost() + "/" + bucketName + "/" + fileName;
+        String url = minioProp.getEndpoint() + "/" + bucketName + "/" + dir + fileName;
+        String urlHost = minioProp.getFilHost() + "/" + bucketName + "/" + dir + fileName;
 
         System.out.println("上传文件成功url ：[{}], urlHost ：[{}]"+url+urlHost);
         log.info("上传文件成功url ：[{}], urlHost ：[{}]", url, urlHost);
